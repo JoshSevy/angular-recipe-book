@@ -8,7 +8,6 @@ export class Recipe {
   public ingredients: Ingredient[];
 
   constructor(name: string, desc: string, imagePath: string, ingredients: Ingredient[]) {
-    this.id = Math.round(Math.random() * Date.now());
     this.name = name;
     this.description = desc;
     this.imagePath = imagePath;

@@ -13,7 +13,7 @@ export class RecipeService {
     new Recipe(
       'Tasty Schnitzel',
       'A super-tasty Shnitzel - just awesome!',
-      'https://upload.wikimedia.org/wikipedia/commons/7/72/Schnitzel.JPG',
+      'https://www.wininganddining.co.za/gallery/3022-24901-header.jpg',
       [
         new Ingredient('Meat', 1),
         new Ingredient('French Fries', 20)
@@ -27,6 +27,27 @@ export class RecipeService {
         new Ingredient('Buns', 2),
         new Ingredient('tomato', 1),
         new Ingredient('onion', 2)
+      ]),
+      new Recipe(
+      'Best Grilled Cheese',
+      'Amazing gouda and chedder grilled cheese',
+      'http://cleaneatsfastfeets.com/wp-content/uploads/2013/04/Italian-Grilled-Cheese.jpg',
+      [
+        new Ingredient('Sharp Chedder', 1),
+        new Ingredient('Sourdough Bread', 2),
+        new Ingredient('tomato', 1),
+        new Ingredient('pesto sauce', 1)
+      ]),
+      new Recipe(
+      'Vegan Chocolate Cream Pie',
+      'Vegan avacado and chocolate cream pie',
+      'http://hellyeahitsvegan.com/wp-content/uploads/2012/10/chocolate-cream-pie.jpg',
+      [
+        new Ingredient('cocoa nibs', 2),
+        new Ingredient('steel cut oats', 1),
+        new Ingredient('avacado', 1),
+        new Ingredient('cashew milk', 1),
+        new Ingredient('sugar', 2)
       ])
   ];
 
@@ -36,8 +57,8 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
-  getRecipeById(id: number) {
-    return this.recipes.find(recipe => recipe.id === id);
+  getRecipe(index: number) {
+    return this.recipes[index];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]): void {
