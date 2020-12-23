@@ -5,6 +5,6 @@ import { Component } from "@angular/core";
   selector: 'app-loading-spinner',
   template: '<div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>',
   styleUrls: ['./loading-spinner.css']
-});
+})
 
 export class LoadingSpinnerComponent {};
