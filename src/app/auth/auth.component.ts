@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 
 export class AuthComponent {
   isLoginMode = true;
+  authEndpoint: string = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=[API_KEY]"
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
