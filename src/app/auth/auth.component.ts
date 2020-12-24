@@ -32,15 +32,12 @@ export class AuthComponent {
         .subscribe(resData => {
           console.log(resData);
           this.isLoading = false;
-        }, error => {
-          console.log(error.message);
-          this.error = 'An error ocurred!'
+        },
+        errorMessage => {
+          this.error = errorMessage;
           this.isLoading = false;
         })
     }
-
-
     form.reset();
   }
-
 }
