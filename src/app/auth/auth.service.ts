@@ -7,7 +7,6 @@ import { User } from './user.model';
 import { postUrl, loginUrl } from '../../../endpoints';
 import { Router } from "@angular/router";
 
-
 export interface AuthResponseData {
   kind: string;
   idToken: string;
@@ -76,7 +75,12 @@ export class AuthService {
 
     if (!userData) return;
 
-    const loadedUser = new User(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
 
     if (loadedUser.token) {
       this.user.next(loadedUser);
