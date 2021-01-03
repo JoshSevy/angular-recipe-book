@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  firebaseAPI: 'AIzaSyDQ0l5KDVSKgqa4J8JPu8gf2hAZELOGDGY'
 };
 
 /*
