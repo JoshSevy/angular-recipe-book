@@ -6,6 +6,7 @@ import { ShoppingListRouterModule } from './shopping-list-router.module';
 
 import { ShoppingEditComponent } from "./shopping-edit/shopping-edit.component";
 import { ShoppingListComponent } from "./shopping-list.component";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { ShoppingListComponent } from "./shopping-list.component";
     ShoppingEditComponent,
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ShoppingListRouterModule,
     FormsModule
   ]
