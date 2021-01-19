@@ -17,7 +17,7 @@
     <a href="https://github.com/JoshSevy/angular-recipe-book"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://ng-html-firebase.web.app">View Demo</a>
+    <a href="https://ng-html-firebase.web.app">Deployed Application</a>
     ·
     <a href="https://github.com/JoshSevy/angular-recipe-book/issues">Report Bug</a>
     ·
