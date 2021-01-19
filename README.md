@@ -83,7 +83,7 @@ npm install npm@latest -g
 
 
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/JoshSevy/angular-recipe-book.git
 ```
 
 Install NPM packages
