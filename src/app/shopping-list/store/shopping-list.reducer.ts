@@ -30,11 +30,13 @@ export function shoppingListReducer(
         ...state,
         ingredients: [...state.ingredients, action.payload]
       };
+
     case ShoppingListActions.ADD_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, ...action.payload]
-      }
+      };
+
     case ShoppingListActions.UPDATE_INGREDIENT:
       const ingredient = state.ingredients[action.payload.index];
 
@@ -48,16 +50,32 @@ export function shoppingListReducer(
 
       return {
         ...state,
-        ingredients: updatedIngredients;
-      }
+        ingredients: updatedIngredients
+      };
+
     case ShoppingListActions.DELETE_INGREDIENT:
       return {
         ...state,
         ingredients: state.ingredients.filter((ing, ingIndex) => {
           return ingIndex !== action.payload;
-        });
-      }
+        })
+      };
+
+    case ShoppingListActions.START_EDIT:
+      return {
+        ...state,
+        editedIngredientIndex: action.payload,
+        editedIngredient: { ...state.ingredients[action.payload] }
+      };
+
+    case ShoppingListActions.STOP_EDIT:
+      return {
+        ...state,
+        editedIngredient: null,
+        editedIngredientIndex: -1,
+      };
+
     default:
       return state;
-  }
+  };
 }
