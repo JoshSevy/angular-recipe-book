@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, switchMap, map } from 'rxjs/operators';
+import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 import * as AuthActions from './auth.actions';
@@ -20,6 +20,12 @@ export interface AuthResponseData {
 
 @Injectable()
 export class AuthEffects {
+
+  @Effect()
+  authSignup = this.actions$.pipe(
+    ofType(AuthActions)
+  )
+
   @Effect()
   authLogin = this.actions$.pipe(
     ofType(AuthActions.LOGIN_START),
@@ -65,6 +71,14 @@ export class AuthEffects {
         })
       );
     }),
+  );
+
+  @Effect({ dispatch: false })
+  authSuccess = this.actions$.pipe(
+    ofType(AuthActions.LOGIN),
+    tap(() => {
+    this.router.navigate(['/']);
+    })
   );
 
   constructor(
