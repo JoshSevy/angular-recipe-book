@@ -30,6 +30,10 @@ export class LoginStart implements Action {
 
 export class LoginFail implements Action {
   readonly type = LOGIN_FAIL;
+
+  constructor(public payload: string) {
+
+  }
 }
 
 export type AuthActions = Login | Logout | LoginStart | LoginFail;
