@@ -4,12 +4,16 @@ import { map, tap } from 'rxjs/operators';
 
 import { RecipeService } from "../recipes/recipe.service";
 import { Recipe } from '../recipes/recipe.model';
+import { Store } from "@ngrx/store";
+
+import * as fromApp from '../store/app.reducer';
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService {
   constructor(
     private http: HttpClient,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private store: Store<fromApp.AppState>,
     ) {}
 
   storeRecipes() {
