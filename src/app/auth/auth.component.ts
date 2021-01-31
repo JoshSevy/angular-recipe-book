@@ -51,8 +51,6 @@ export class AuthComponent implements OnDestroy, OnInit {
     const email = form.value.email;
     const password = form.value.password;
 
-    let authObs: Observable<AuthResponseData>;
-
     this.isLoading = true;
     if (this.isLoginMode) {
       this.store.dispatch(new AuthActions.LoginStart({ email: email, password: password }))

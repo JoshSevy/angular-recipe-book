@@ -48,4 +48,5 @@ export type AuthActions =
   AuthenticateSuccess |
   Logout |
   LoginStart |
-  AuthenticateFail;
+  AuthenticateFail |
+  SignupStart;
