@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { switchMap, map } from 'rxjs/operators';
 
-import * as RecipesActions from '../store/recipe.actions';
+import * as RecipeActions from '../store/recipe.actions';
 import { Recipe } from '../recipe.model';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class RecipeEffects {
   @Effect()
   fetchRecipes = this.actions$.pipe(
-    ofType(RecipesActions.FETCH_RECIPES),
+    ofType(RecipeActions.FETCH_RECIPES),
     switchMap(() => {
       return this.http.get<Recipe[]>(
       'https://ng-html-firebase-default-rtdb.firebaseio.com/recipes.json'
@@ -23,7 +25,7 @@ export class RecipeEffects {
       });
     }),
     map(recipes => {
-      return new RecipesActions.SetRecipes(recipes);
+      return new RecipeActions.SetRecipes(recipes);
     })
   );
 
