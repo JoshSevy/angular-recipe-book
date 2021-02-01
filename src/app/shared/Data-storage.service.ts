@@ -1,50 +1,52 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { map, tap } from 'rxjs/operators';
+//! Data handling before adding ngrx global state management
 
-import { RecipeService } from "../recipes/recipe.service";
-import { Recipe } from '../recipes/recipe.model';
-import { Store } from "@ngrx/store";
+// import { HttpClient } from "@angular/common/http";
+// import { Injectable } from "@angular/core";
+// import { map, tap } from 'rxjs/operators';
 
-import * as fromApp from '../store/app.reducer';
-import * as RecipeActions from '../recipes/store/recipe.actions';
+// import { RecipeService } from "../recipes/recipe.service";
+// import { Recipe } from '../recipes/recipe.model';
+// import { Store } from "@ngrx/store";
 
-@Injectable({providedIn: 'root'})
-export class DataStorageService {
-  constructor(
-    private http: HttpClient,
-    private recipeService: RecipeService,
-    private store: Store<fromApp.AppState>,
-    ) {}
+// import * as fromApp from '../store/app.reducer';
+// import * as RecipeActions from '../recipes/store/recipe.actions';
 
-  storeRecipes() {
-    const recipes = this.recipeService.getRecipes();
-    return this.http.put(
-      'https://ng-html-firebase-default-rtdb.firebaseio.com/recipes.json',
-      recipes
-      )
-      .subscribe(response => {
-        console.log(response);
-      });
-  }
+// @Injectable({providedIn: 'root'})
+// export class DataStorageService {
+//   constructor(
+//     private http: HttpClient,
+//     private recipeService: RecipeService,
+//     private store: Store<fromApp.AppState>,
+//     ) {}
 
-  fetchRecipes() {
-    return this.http.get<Recipe[]>(
-      'https://ng-html-firebase-default-rtdb.firebaseio.com/recipes.json'
-    )
-    .pipe(
-      map(recipes => {
-      return recipes.map(recipe => {
-        return {
-          ...recipe,
-          ingredients: recipe.ingredients ? recipe.ingredients : []
-          };
-        });
-      }),
-      tap(recipes => {
-        // this.recipeService.setRecipes(recipes)
-        this.store.dispatch(new RecipeActions.SetRecipes(recipes))
-      })
-    );
-  }
-}
+//   storeRecipes() {
+//     const recipes = this.recipeService.getRecipes();
+//     return this.http.put(
+//       'https://ng-html-firebase-default-rtdb.firebaseio.com/recipes.json',
+//       recipes
+//       )
+//       .subscribe(response => {
+//         console.log(response);
+//       });
+//   }
+
+//   fetchRecipes() {
+//     return this.http.get<Recipe[]>(
+//       'https://ng-html-firebase-default-rtdb.firebaseio.com/recipes.json'
+//     )
+//     .pipe(
+//       map(recipes => {
+//       return recipes.map(recipe => {
+//         return {
+//           ...recipe,
+//           ingredients: recipe.ingredients ? recipe.ingredients : []
+//           };
+//         });
+//       }),
+//       tap(recipes => {
+//         // this.recipeService.setRecipes(recipes)
+//         this.store.dispatch(new RecipeActions.SetRecipes(recipes))
+//       })
+//     );
+//   }
+// }
