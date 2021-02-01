@@ -1,4 +1,3 @@
-import { act } from '@ngrx/effects';
 import { Recipe } from '../recipe.model';
 import * as RecipeActions from './recipe.actions';
 

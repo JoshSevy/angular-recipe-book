@@ -59,7 +59,6 @@ const handleError = (errorRes: any) => {
 
 @Injectable()
 export class AuthEffects {
-
   @Effect()
   authSignup = this.actions$.pipe(
     ofType(AuthActions.SIGNUP_START),
@@ -174,18 +173,20 @@ export class AuthEffects {
     })
   );
 
-
   @Effect({ dispatch: false })
-  authLogout = this.actions$.pipe(ofType(AuthActions.LOGOUT), tap(() => {
+  authLogout = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(() => {
     this.authService.clearLogoutTimer();
     localStorage.removeItem('userData');
     this.router.navigate(['/auth']);
-  }))
+    })
+  );
 
   constructor(
     private actions$: Actions,
     private http: HttpClient,
     private router: Router,
     private authService: AuthService
-    ) {}
+  ) {}
 }

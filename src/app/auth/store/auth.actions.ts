@@ -35,9 +35,7 @@ export class LoginStart implements Action {
 export class AuthenticateFail implements Action {
   readonly type = AUTHENTICATE_FAIL;
 
-  constructor(public payload: string) {
-
-  }
+  constructor(public payload: string) {}
 }
 
 export class SignupStart implements Action {

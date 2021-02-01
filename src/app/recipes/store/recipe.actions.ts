@@ -1,4 +1,4 @@
-import { Action, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { Recipe } from '../recipe.model';
 
 export const SET_RECIPES = '[Recipe] Set Recipe';
