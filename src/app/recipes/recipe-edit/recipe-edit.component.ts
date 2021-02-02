@@ -16,7 +16,7 @@ import * as RecipeActions from '../store/recipe.actions';
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
   id: number;
-  editMode: boolean = false;
+  editMode = false;
   recipeForm: FormGroup;
 
   private storeSub: Subscription;

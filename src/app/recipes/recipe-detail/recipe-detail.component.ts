@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs/operators';
 
 import { Recipe } from '../recipe.model';
-
 import * as fromApp from '../../store/app.reducer';
 import * as RecipeActions from '../store/recipe.actions';
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
