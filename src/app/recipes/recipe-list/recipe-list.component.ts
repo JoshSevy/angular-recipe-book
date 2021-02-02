@@ -5,10 +5,9 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
 
 import * as fromApp from '../../store/app.reducer';
-import * as RecipeActions from '../store/recipe.actions';
+
 
 @Component({
   selector: 'app-recipe-list',
