@@ -30,10 +30,10 @@ const handleAuthentication = (
   const user = new User(email, userId, token, expirationDate);
   localStorage.setItem('userData', JSON.stringify(user));
   return AuthActions.authenticateSuccess({
-    email: email,
-    userId: userId,
-    token: token,
-    expirationDate: expirationDate,
+    email,
+    userId,
+    token,
+    expirationDate,
     redirect: true
   });
 };

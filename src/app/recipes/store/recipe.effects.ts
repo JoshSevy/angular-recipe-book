@@ -21,7 +21,10 @@ export class RecipeEffects {
         );
       }),
       map(recipes => {
-        return recipes.map((recipe) => {
+        console.log(recipes)
+        //!error happening here
+        return recipes.map(recipe => {
+          console.log(recipe)
           return {
             ...recipe,
             ingredients: recipe.ingredients ? recipe.ingredients : []
