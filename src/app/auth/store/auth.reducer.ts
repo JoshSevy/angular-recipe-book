@@ -1,5 +1,6 @@
+import { Action, createReducer, on } from '@ngrx/store';
+import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
-import { User } from "../user.model";
 
 export interface State {
   user: User;
@@ -13,54 +14,62 @@ const initialState: State = {
   loading: false
 }
 
-export function authReducer(
-  state = initialState,
-  action: AuthActions.AuthActions
-) {
-  switch (action.type) {
-    case AuthActions.AUTHENTICATE_SUCCESS:
-      const user = new User(
-        action.payload.email,
-        action.payload.userId,
-        action.payload.token,
-        action.payload.expirationDate
-      );
-      return {
-        ...state,
-        authError: null,
-        user: user,
-        loading: false
-      }
+const _authReducer = createReducer(
 
-    case AuthActions.LOGOUT:
-      return {
-        ...state,
-        user: null
-      }
+  initialState,
 
-    case AuthActions.LOGIN_START:
-    case AuthActions.SIGNUP_START:
-      return {
-        ...state,
-        authError: null,
-        loading: true
-      }
+  on(
+    AuthActions.loginStart,
+    AuthActions.signupStart,
+    (state) => ({
+      ...state,
+      authError: null,
+      loading: true
+    })
+  ),
 
-    case AuthActions.AUTHENTICATE_FAIL:
-      return {
-        ...state,
-        user: null,
-        authError: action.payload,
-        loading: false
-      }
+  on(
+    AuthActions.authenticateSuccess,
+    (state, action) => ({
+      ...state,
+      authError: null,
+      loading: false,
+      user: new User(
+        action.email,
+        action.userId,
+        action.token,
+        action.expirationDate
+      )
+    })
+  ),
 
-    case AuthActions.CLEAR_ERROR:
-      return {
-        ...state,
-        authError: null
-      }
+  on(
+    AuthActions.authenticateFail,
+    (state, action) => ({
+      ...state,
+      user: null,
+      authError: action.errorMessage,
+      loading: false
+    })
+  ),
 
-    default:
-      return state;
-  }
+  on(
+    AuthActions.logout,
+    (state) => ({
+      ...state,
+      user: null
+    })
+  ),
+
+  on(
+    AuthActions.clearError,
+    (state) => ({
+      ...state,
+      authError: null
+    })
+  )
+);
+
+export function authReducer(state: State, action: Action) {
+  return _authReducer(state, action);
 }
