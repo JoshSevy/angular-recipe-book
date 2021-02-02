@@ -48,18 +48,20 @@ export class AuthComponent implements OnDestroy, OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (!form.valid) return;
+    if (!form.valid) {
+      return;
+    }
 
     const email = form.value.email;
     const password = form.value.password;
 
     if (this.isLoginMode) {
       this.store.dispatch(
-        new AuthActions.LoginStart({ email: email, password: password })
+        new AuthActions.loginStart({ email, password })
       );
     } else {
       this.store.dispatch(
-        new AuthActions.SignupStart({ email: email, password: password })
+        new AuthActions.signupStart({ email, password })
       );
     }
 
@@ -67,7 +69,17 @@ export class AuthComponent implements OnDestroy, OnInit {
   }
 
   onHandleError() {
-    this.store.dispatch(new AuthActions.ClearError());
+    this.store.dispatch(AuthActions.clearError());
+  }
+
+  ngOnDestroy() {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
   }
 
   private showErrorAlert(message: string) {
@@ -82,15 +94,5 @@ export class AuthComponent implements OnDestroy, OnInit {
       this.closeSub.unsubscribe();
       hostViewContainerRef.clear();
     });
-  }
-
-  ngOnDestroy() {
-    if (this.closeSub) {
-      this.closeSub.unsubscribe();
-    }
-
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
-    }
   }
 }

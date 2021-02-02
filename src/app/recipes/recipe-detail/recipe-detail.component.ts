@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -46,17 +46,16 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onAddToShoppingList() {
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.dispatch(ShoppingListActions.addIngredients({ingredients: this.recipe.ingredients}));
   }
 
   onEditRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route});
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onDelete() {
     // this.recipeService.removeRecipe(this.id);
-    this.store.dispatch(new RecipeActions.DeleteRecipe(this.id));
+    this.store.dispatch(RecipeActions.deleteRecipe({index: this.id}));
     this.router.navigate(['/recipes']);
   }
-
 }
