@@ -13,10 +13,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 
-import * as fromApp from './store/app.reducer';
+
 import { AuthEffects } from './auth/store/auth.effects';
 import { RecipeEffects } from './recipes/store/recipe.effects';
 import { environment } from 'src/environments/environment';
+
+import * as fromAuth from './auth/store/auth.reducer';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
+    StoreModule.forRoot({auth: fromAuth.authReducer}),
     EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     SharedModule,
     CoreModule,

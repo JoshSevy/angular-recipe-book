@@ -57,11 +57,11 @@ export class AuthComponent implements OnDestroy, OnInit {
 
     if (this.isLoginMode) {
       this.store.dispatch(
-        new AuthActions.loginStart({ email, password })
+        AuthActions.loginStart({ email, password })
       );
     } else {
       this.store.dispatch(
-        new AuthActions.signupStart({ email, password })
+        AuthActions.signupStart({ email, password })
       );
     }
 

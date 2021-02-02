@@ -4,7 +4,6 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 
 
-
 @NgModule({
   providers: [
     [
@@ -17,6 +16,4 @@ import { AuthInterceptorService } from "./auth/auth-interceptor.service";
   ]
 })
 
-export class CoreModule {
-
-}
+export class CoreModule {}

@@ -45,7 +45,7 @@ export class RecipeEffects {
         );
       })
     ),
-    { dispatch: false };
+    { dispatch: false }
   );
 
   constructor(

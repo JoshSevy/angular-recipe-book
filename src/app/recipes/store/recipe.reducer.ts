@@ -1,21 +1,24 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Recipe } from '../recipe.model';
-import * as RecipeActions from './recipe.actions';
+import * as RecipesActions from '../store/recipe.actions';
+
 
 export interface State {
   recipes: Recipe[];
 }
 
+
 const initialState: State = {
   recipes: []
-}
+};
+
 
 const _recipeReducer = createReducer(
 
   initialState,
 
   on(
-    RecipeActions.addRecipe,
+    RecipesActions.addRecipe,
     (state, action) => ({
       ...state,
       recipes: state.recipes.concat({ ...action.recipe })
@@ -23,7 +26,7 @@ const _recipeReducer = createReducer(
   ),
 
   on(
-    RecipeActions.updateRecipe,
+    RecipesActions.updateRecipe,
     (state, action) => ({
       ...state,
       recipes: state.recipes.map(
@@ -33,7 +36,7 @@ const _recipeReducer = createReducer(
   ),
 
   on(
-    RecipeActions.deleteRecipe,
+    RecipesActions.deleteRecipe,
     (state, action) => ({
       ...state,
       recipes: state.recipes.filter(
@@ -43,13 +46,15 @@ const _recipeReducer = createReducer(
   ),
 
   on(
-    RecipeActions.setRecipes,
+    RecipesActions.setRecipes,
     (state, action) => ({
       ...state,
       recipes: [ ...action.recipes ]
     })
   )
+
 );
+
 
 export function recipeReducer(state: State, action: Action) {
   return _recipeReducer(state, action);

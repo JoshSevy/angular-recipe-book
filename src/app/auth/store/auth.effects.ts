@@ -68,8 +68,8 @@ export class AuthEffects {
           .post<AuthResponseData>(
             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPI}`,
             {
-              email: signupAction.payload.email,
-              password: signupAction.payload.password,
+              email: action.email,
+              password: action.password,
               returnSecureToken: true
             }
           )
@@ -95,14 +95,14 @@ export class AuthEffects {
 
   authLogin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.LOGIN_START),
-      switchMap((authData: AuthActions.LoginStart) => {
+      ofType(AuthActions.loginStart),
+      switchMap(action => {
         return this.http
           .post<AuthResponseData>(
             `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPI}`,
             {
-              email: authData.payload.email,
-              password: authData.payload.password,
+              email: action.email,
+              password: action.password,
               returnSecureToken: true
             }
           )
@@ -135,7 +135,7 @@ export class AuthEffects {
 
   autoLogin$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.AUTO_LOGIN),
+      ofType(AuthActions.autoLogin),
       map(() => {
         const userData: {
         email: string;
