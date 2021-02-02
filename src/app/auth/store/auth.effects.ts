@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, switchMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -93,48 +93,45 @@ export class AuthEffects {
     )
   );
 
-
-
-  @Effect()
-  authLogin = this.actions$.pipe(
-    ofType(AuthActions.LOGIN_START),
-    switchMap((authData: AuthActions.LoginStart) => {
-      return this.http
-        .post<AuthResponseData>(
-          `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPI}`,
-          {
-            email: authData.payload.email,
-            password: authData.payload.password,
-            returnSecureToken: true
-          }
-        )
-        .pipe(
-          tap(resData => {
-            this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+  authLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.LOGIN_START),
+      switchMap((authData: AuthActions.LoginStart) => {
+        return this.http
+          .post<AuthResponseData>(
+            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPI}`,
+            {
+              email: authData.payload.email,
+              password: authData.payload.password,
+              returnSecureToken: true
+            }
+          )
+          .pipe(
+            tap(resData => {
+              this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+            }),
+            map(resData => {
+              return handleAuthentication(
+                +resData.expiresIn,
+                resData.email,
+                resData.localId,
+                resData.idToken
+              )
           }),
-          map(resData => {
-            return handleAuthentication(
-              +resData.expiresIn,
-              resData.email,
-              resData.localId,
-              resData.idToken
-            )
-        }),
-        catchError(errorRes => {
-          return handleError(errorRes)
-        })
-      );
-    }),
+          catchError(errorRes => {
+            return handleError(errorRes)
+          })
+        );
+      })
+    )
   );
 
-  @Effect({ dispatch: false })
-  authRedirect = this.actions$.pipe(
-    ofType(AuthActions.AUTHENTICATE_SUCCESS),
-    tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
-      if (authSuccessAction.payload.redirect) {
-        this.router.navigate(['/']);
-      }
-    })
+
+  authRedirect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.authenticateSuccess),
+      tap(action => action.redirect && this.router.navigate(['/']))
+    ), { dispatch: false }
   );
 
   @Effect()
