@@ -21,8 +21,8 @@ export class RecipeEffects {
         );
       }),
       map(recipes => {
-        return recipes['recipes'].map(recipe => {
-          console.log(recipe)
+        console.log(recipes)
+        return recipes.map(recipe => {
           return {
             ...recipe,
             ingredients: recipe.ingredients ? recipe.ingredients : []

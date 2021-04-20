@@ -26,7 +26,7 @@ import * as fromAuth from './auth/store/auth.reducer';
     HeaderComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({auth: fromAuth.authReducer}),

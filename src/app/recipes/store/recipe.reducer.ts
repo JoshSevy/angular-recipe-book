@@ -1,3 +1,4 @@
+import { TestBed } from '@angular/core/testing';
 import { Action, createReducer, on } from '@ngrx/store';
 import { Recipe } from '../recipe.model';
 import * as RecipesActions from '../store/recipe.actions';
@@ -9,7 +10,14 @@ export interface State {
 
 
 const initialState: State = {
-  recipes: []
+  recipes: [
+    {
+        name: 'Test',
+        description: 'Test Recipe',
+        imagePath: 'http.url.com',
+        ingredients: null
+    }
+  ]
 };
 
 
