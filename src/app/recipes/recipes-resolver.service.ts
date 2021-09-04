@@ -18,6 +18,10 @@ import { Recipe } from './recipe.model';
 export class RecipesResolverService implements Resolve<{recipes: Recipe[]}> {
   constructor(private store: Store<fromApp.AppState>, private actions$: Actions) {}
 
+  /**
+   * @deprecated
+   *
+   */
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select('recipes').pipe(
       take(1),
